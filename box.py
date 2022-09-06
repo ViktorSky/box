@@ -1,5 +1,6 @@
 # made by V¡ktor
 # 2022-09-06
+# thanks for using box.py <3
 
 from datetime import datetime
 from random import choice
