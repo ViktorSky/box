@@ -33,9 +33,9 @@ def tzFilter(hour: int = 23, tz: str = None) -> int:
 
 
 
-def random_code(length: int = 15, chars: (str, list, tuple) = None) -> str:
+def randomCode(length: int = 15, chars: (str, list, tuple) = None) -> str:
     # Example:
-    # >> random_code(length = 8, chars = "aeiou12345")
+    # >> randomCode(length = 8, chars = "aeiou12345")
     # 552ei4o4
     return "".join(choice(
             list(chars) if chars else list(ascii_letters + digits + "!@#$%&")
