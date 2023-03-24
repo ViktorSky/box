@@ -2,44 +2,73 @@
 # 2022-09-06
 # thanks for using box.py <3
 
-from datetime import datetime
-from random import choice
-from pytz import timezone
-from string import (
-    ascii_letters,
-    digits
-)
-
 import os
+import datetime
+import random
+from string import ascii_letters, digits
+
+import pytz
 
 
-clear = lambda: os.system("cls" if os.name == "nt" else "clear")
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
 
 
-def tzFilter(hour: int = 23, tz: str = None) -> int:
+def gray(*args, type=1) -> str:
+    """gray text"""
+    return f"\033[{type};30m" + " ".join(str(obj) for obj in args) + "\033[0m"
+
+
+def red(*args, type=1) -> str:
+    """red text"""
+    return f"\033[{type};31m" + " ".join(str(obj) for obj in args) + "\033[0m"
+
+
+def green(*args, type=1) -> str:
+    """green text"""
+    return f"\033[{type};32m" + " ".join(str(obj) for obj in args) + "\033[0m"
+
+
+def yellow(*args, type=1) -> str:
+    """yellow text"""
+    return f"\033[{type};33m" + " ".join(str(obj) for obj in args) + "\033[0m"
+
+
+def blue(*args, type=1) -> str:
+    """blue text"""
+    return f"\033[{type};34m" + " ".join(str(obj) for obj in args) + "\033[0m"
+
+
+def magneta(*args, type=1) -> str:
+    """magneta text"""
+    return f"\033[{type};35m" + " ".join(str(obj) for obj in args) + "\033[0m"
+
+
+def cyan(*args, type=1) -> str:
+    """cyan text"""
+    return f"\033[{type};36m" + " ".join(str(obj) for obj in args) + "\033[0m"
+
+
+def tzFilter(hour: int = 23, gmt: int = None) -> int:
     # Examples:
-    # >> tzFilter(hour = 18)
+    # >>> tzFilter(hour=18)
+    # -5
+    # >>> tzFilter(gmt=5)
     # -300
-    #
-    # >> tzFilter(tz = "Etc/GMT+5")
-    # -300
-    zones = ['Etc/GMT' + (f'+{i}' if i > 0 else f'{i}') for i in range(-12, 12)]
-    
-    return next(int(
-            datetime.now(timezone(_)).strftime("%Z").replace("GMT", "00")
-        ) * 60 for _ in ([tz] if tz else zones) if (
-            tz or (int(datetime.now(timezone(_)).strftime("%H")) == hour)
-        )
-    )
+    zones = ('Etc/GMT' + (f'+{i}' if i > 0 else str(i)) for i in range(-12, 12))
+    for _ in (['Etc/GMT' + (f'+{gmt}' if gmt > 0 else str(gmt))] if isinstance(gmt, int) else zones):
+        zone = datetime.datetime.now(pytz.timezone(_))
+        if not gmt and int(zone.strftime('%H')) != hour:
+            continue
+        return int(zone.strftime('%Z').replace('GMT', '00')) * 60
 
 
-
-def randomCode(length: int = 15, chars: (str, list, tuple) = None) -> str:
+def randomCode(length=15, chars=None) -> str:
     # Example:
-    # >> randomCode(length = 8, chars = "aeiou12345")
-    # 552ei4o4
-    return "".join(choice(
-            list(chars) if chars else list(ascii_letters + digits + "!@#$%&")
+    # >>> randomCode(length=8, chars="aeiou12345")
+    # '552ei4o4'
+    return "".join(random.choice(
+        list(chars) if chars else list(
+            string.ascii_letters + string.digits + "!@#$%&")
         ) for _ in range(length)
     )
-
