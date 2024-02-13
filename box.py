@@ -5,10 +5,21 @@
 import os
 import datetime
 import random
-from string import ascii_letters, digits
-
+import string
 import pytz
 
+__all__ = (
+  "blue",
+  "clear",
+  "cyan",
+  "gray",
+  "green",
+  "magneta",
+  "randomCode",
+  "red",
+  "tzFilter",
+  "yellow"
+)
 
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
