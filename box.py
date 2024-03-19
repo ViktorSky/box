@@ -25,42 +25,42 @@ def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
 
-def gray(*args, type=1) -> str:
+def gray(*args, type=1):
     """gray text"""
     return f"\033[{type};30m" + " ".join(str(obj) for obj in args) + "\033[0m"
 
 
-def red(*args, type=1) -> str:
+def red(*args, type=1):
     """red text"""
     return f"\033[{type};31m" + " ".join(str(obj) for obj in args) + "\033[0m"
 
 
-def green(*args, type=1) -> str:
+def green(*args, type=1):
     """green text"""
     return f"\033[{type};32m" + " ".join(str(obj) for obj in args) + "\033[0m"
 
 
-def yellow(*args, type=1) -> str:
+def yellow(*args, type=1):
     """yellow text"""
     return f"\033[{type};33m" + " ".join(str(obj) for obj in args) + "\033[0m"
 
 
-def blue(*args, type=1) -> str:
+def blue(*args, type=1):
     """blue text"""
     return f"\033[{type};34m" + " ".join(str(obj) for obj in args) + "\033[0m"
 
 
-def magneta(*args, type=1) -> str:
+def magneta(*args, type=1):
     """magneta text"""
     return f"\033[{type};35m" + " ".join(str(obj) for obj in args) + "\033[0m"
 
 
-def cyan(*args, type=1) -> str:
+def cyan(*args, type=1):
     """cyan text"""
     return f"\033[{type};36m" + " ".join(str(obj) for obj in args) + "\033[0m"
 
 
-def tzFilter(hour: int = 23, gmt: int = None) -> int:
+def tzFilter(hour=23, gmt=None):
     # Examples:
     # >>> tzFilter(hour=18)
     # -5
@@ -74,7 +74,7 @@ def tzFilter(hour: int = 23, gmt: int = None) -> int:
         return int(zone.strftime('%Z').replace('GMT', '00')) * 60
 
 
-def randomCode(length=15, chars=None) -> str:
+def randomCode(length=15, chars=None):
     # Example:
     # >>> randomCode(length=8, chars="aeiou12345")
     # '552ei4o4'
